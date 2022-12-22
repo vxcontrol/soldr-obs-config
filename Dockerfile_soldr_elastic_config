@@ -1,0 +1,16 @@
+FROM debian:buster-slim
+
+RUN mkdir -p /opt/soldr_observability
+
+COPY config /opt/soldr_observability/config
+COPY elastic_config_gen_password.sh /opt/soldr_observability
+
+RUN chmod +x /opt/soldr_observability/elastic_config_gen_password.sh
+
+RUN \
+  apt update && \
+  apt install -y ca-certificates && \
+  apt install -y curl
+
+ENTRYPOINT ["/opt/soldr_observability/elastic_config_gen_password.sh"]
+
