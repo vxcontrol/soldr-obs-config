@@ -1,0 +1,145 @@
+admin:
+  http:
+    host-port: :14269
+collector:
+  grpc:
+    tls:
+      cert: ""
+      client-ca: ""
+      enabled: false
+      key: ""
+  grpc-server:
+    host-port: :14250
+    max-message-size: 4194304
+  http:
+    tls:
+      cert: ""
+      client-ca: ""
+      enabled: false
+      key: ""
+  http-server:
+    host-port: :14268
+  num-workers: 100 
+  queue-size: 5000
+  queue-size-memory: "0"
+  tags: ""
+  zipkin:
+    allowed-headers: content-type
+    allowed-origins: '*'
+    host-port: ""
+config-file: ""
+dir: ./
+downsampling:
+  hashsalt: ""
+  ratio: "1"
+es:
+  bulk:
+    actions: 1000
+    flush-interval: 200ms
+    size: 5000000
+    workers: 1000
+  create-index-templates: false
+  index-date-separator: '-'
+  index-prefix: ""
+  index-rollover-frequency-services: day
+  index-rollover-frequency-spans: day
+  log-level: error
+  max-doc-count: 10000
+  max-span-age: 72h0m0s
+  num-replicas: 1
+  num-shards: 5
+  password: PASSWORD-TEMPLATE
+  remote-read-clusters: ""
+  send-get-body-as: ""
+  server-urls: http://elasticsearch:9200
+  sniffer: false
+  sniffer-tls-enabled: false
+  tags-as-fields:
+    all: true
+    config-file: ""
+    dot-replacement: '@'
+    include: ""
+  timeout: 0s
+  tls:
+    ca: ""
+    cert: ""
+    enabled: false
+    key: ""
+    server-name: ""
+    skip-host-verify: false
+  token-file: ""
+  use-aliases: true
+  use-ilm: true
+  username: "elastic"
+  version: "0"
+format: md
+http-server:
+  host-port: :5778
+log-level: info
+metrics-backend: prometheus
+metrics-http-route: /metrics
+processor:
+  jaeger-binary:
+    server-host-port: :6832
+    server-max-packet-size: 65000
+    server-queue-size: 1000
+    server-socket-buffer-size: 0
+    workers: 10
+  jaeger-compact:
+    server-host-port: :6831
+    server-max-packet-size: 65000
+    server-queue-size: 1000
+    server-socket-buffer-size: 0
+    workers: 10
+  zipkin-compact:
+    server-host-port: :5775
+    server-max-packet-size: 65000
+    server-queue-size: 1000
+    server-socket-buffer-size: 0
+    workers: 10
+query:
+  additional-headers: []
+  base-path: /
+  bearer-token-propagation: false
+  grpc:
+    tls:
+      cert: ""
+      client-ca: ""
+      enabled: false
+      key: ""
+  grpc-server:
+    host-port: :16685
+  http:
+    tls:
+      cert: ""
+      client-ca: ""
+      enabled: false
+      key: ""
+  http-server:
+    host-port: :16686
+  max-clock-skew-adjustment: 0s
+  static-files: ""
+  ui-config: ""
+reporter:
+  grpc:
+    discovery:
+      min-peers: 3
+    host-port: ""
+    retry:
+      max: "3"
+    tls:
+      ca: ""
+      cert: ""
+      enabled: false
+      key: ""
+      server-name: ""
+      skip-host-verify: false
+  type: grpc
+  sampling:
+   strategies-file: ""
+  strategies-reload-interval: 0s
+span-storage:
+  type: elasticsearch
+status:
+  http:
+    host-port: :14269

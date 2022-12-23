@@ -1,0 +1,24 @@
+name: VXControl observability stack build and push
+
+on: workflow_call
+
+jobs:
+  build_and_push_docker:
+    name: Docker Build and Publish
+    environment:
+      name: production
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Docker build soldr-observability-stack-config
+        uses: ./.github/actions/docker_build
+        with:
+          docker_name: "soldr-observability-stack-config"
+          docker_login: ${{ secrets.DOCKER_LOGIN }}
+          docker_password: ${{ secrets.DOCKER_PASSWORD }}
+          file: "Docker_soldr_obsevbility_stack_config"
+          

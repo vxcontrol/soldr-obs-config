@@ -1,0 +1,21 @@
+name: Docker build and push
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - v[0-9]+.[0-9]+.[0-9]+
+  workflow_dispatch:
+
+jobs:
+#   BUILD DOCKER
+  build_docker_soldr_elastic_config_image:
+    uses: vxcontrol/observability-config/.github/workflows/build-docker-soldr-elastic-config-image.yml@master
+    if: github.ref_name == 'master' || startsWith(github.ref, 'refs/tags')
+    secrets: inherit
+  build_docker_soldr_observability_stack_config_image:
+    uses: vxcontrol/observability-config/.github/workflows/build-docker-soldr-observability-stack-config-image.yml@master
+    if: github.ref_name == 'master' || startsWith(github.ref, 'refs/tags')
+    secrets: inherit
+    

@@ -1,0 +1,18 @@
+FROM debian:buster-slim
+
+RUN mkdir -p /opt/soldr_observability
+
+COPY config /opt/soldr_observability/config
+COPY start_soldr_observability_stack.sh /opt/soldr_observability
+
+RUN chmod +x /opt/soldr_observability/start_soldr_observability_stack.sh
+
+RUN \ 
+  apt update && \
+  apt install -y ca-certificates && \
+  apt install -y curl && \
+  apt install -y jq
+
+WORKDIR /opt/soldr_observability
+
+ENTRYPOINT ["/opt/soldr_observability/start_soldr_observability_stack.sh"]
