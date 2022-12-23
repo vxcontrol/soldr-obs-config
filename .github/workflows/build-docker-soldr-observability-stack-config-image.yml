@@ -20,5 +20,5 @@ jobs:
           docker_name: "soldr-observability-stack-config"
           docker_login: ${{ secrets.DOCKER_LOGIN }}
           docker_password: ${{ secrets.DOCKER_PASSWORD }}
-          file: "Docker_soldr_obsevbility_stack_config"
+          file: "Dockerfile_soldr_observability_stack_config"
           
