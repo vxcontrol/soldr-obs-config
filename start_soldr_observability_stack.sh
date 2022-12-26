@@ -63,7 +63,7 @@ echo "Copy config files to containers dst dirs"
 cp -R config/grafana/* /etc/grafana/
 cp -R config/grafana/dashboards/* /var/lib/grafana/dashboards/
 cp -R config/jaeger/* /etc/jaeger/
-cp -R config/loki/* /etc/loki/local-config.yaml
+cp -R config/loki/* /etc/loki/
 cp -R config/otelcontribcol/* /etc/otel/
 
 chown -R 472 /etc/grafana
