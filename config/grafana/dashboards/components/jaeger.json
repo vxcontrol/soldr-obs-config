@@ -3,30 +3,45 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
   },
   "description": "Dashboard for monitoring jaeger running in a k8s environment. Works with 1.9+. Feedbacks? Please send to luong.vo@employmenthero.com",
   "editable": true,
+  "fiscalYearStartMonth": 0,
   "gnetId": 10001,
   "graphTooltip": 0,
-  "id": 5,
   "links": [],
+  "liveNow": false,
   "panels": [
     {
-      "datasource": null,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -82,14 +97,20 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
           "exemplar": true,
           "expr": "process_max_fds{instance=\"10.20.208.123:14269\", job=\"jaeger-collector\"}",
           "interval": "",
@@ -97,6 +118,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
           "exemplar": true,
           "expr": "process_open_fds{instance=\"10.20.208.123:14269\", job=\"jaeger-collector\"}",
           "hide": false,
@@ -109,13 +134,18 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -171,14 +201,20 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
           "exemplar": true,
           "expr": "go_threads{instance=\"10.20.208.123:14269\", job=\"jaeger-collector\"}",
           "interval": "",
@@ -186,6 +222,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
           "exemplar": true,
           "expr": "go_goroutines{instance=\"10.20.208.123:14269\", job=\"jaeger-collector\"}",
           "hide": false,
@@ -199,7 +239,10 @@
     },
     {
       "collapsed": false,
-      "datasource": null,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -208,6 +251,15 @@
       },
       "id": 32,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Jaeger Collector",
       "type": "row"
     },
@@ -216,7 +268,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "VictoriaMetrics",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P4169E866C3094E38"
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -245,7 +300,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "8.0.0",
+      "pluginVersion": "9.3.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -255,6 +310,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "exemplar": true,
           "expr": "sum(irate(jaeger_spans_received_total[5m]))",
           "format": "time_series",
@@ -266,9 +325,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Spans Received/sec",
       "tooltip": {
         "shared": true,
@@ -277,33 +334,24 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -311,7 +359,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "VictoriaMetrics",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P4169E866C3094E38"
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -340,7 +391,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "8.0.0",
+      "pluginVersion": "9.3.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -350,6 +401,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "exemplar": true,
           "expr": "jaeger_in_queue_latency_sum / jaeger_in_queue_latency_count",
           "format": "time_series",
@@ -361,9 +416,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Average in-queue latency (sec)",
       "tooltip": {
         "shared": true,
@@ -372,33 +425,24 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -406,7 +450,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "VictoriaMetrics",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P4169E866C3094E38"
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -435,7 +482,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "8.0.0",
+      "pluginVersion": "9.3.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -445,6 +492,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "exemplar": true,
           "expr": "jaeger_batch_size",
           "format": "time_series",
@@ -455,9 +506,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Batch Size (spans)",
       "tooltip": {
         "shared": true,
@@ -466,33 +515,24 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -500,7 +540,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "VictoriaMetrics",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P4169E866C3094E38"
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -529,7 +572,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "8.0.0",
+      "pluginVersion": "9.3.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -539,6 +582,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "exemplar": true,
           "expr": "jaeger_queue_length",
           "format": "time_series",
@@ -549,6 +596,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "exemplar": true,
           "expr": "jaeger_queue_capacity",
           "hide": false,
@@ -559,9 +610,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Queue Length (Spans)",
       "tooltip": {
         "shared": true,
@@ -570,33 +619,24 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -604,7 +644,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "VictoriaMetrics",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P4169E866C3094E38"
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -633,7 +676,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "8.0.0",
+      "pluginVersion": "9.3.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -643,6 +686,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "exemplar": true,
           "expr": "irate(jaeger_spans_dropped_total[5m])",
           "format": "time_series",
@@ -653,9 +700,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Spans Dropped/sec",
       "tooltip": {
         "shared": true,
@@ -664,33 +709,24 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -698,7 +734,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "VictoriaMetrics",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P4169E866C3094E38"
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -727,7 +766,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "8.0.0",
+      "pluginVersion": "9.3.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -737,6 +776,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "exemplar": true,
           "expr": "jaeger_save_latency_sum / jaeger_save_latency_count",
           "format": "time_series",
@@ -747,9 +790,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Span save latency (sec)",
       "tooltip": {
         "shared": true,
@@ -758,38 +799,32 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
       "collapsed": true,
-      "datasource": null,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -803,14 +838,17 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "VictoriaMetrics",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
             "w": 8,
             "x": 0,
-            "y": 16
+            "y": 24
           },
           "hiddenSeries": false,
           "id": 8,
@@ -832,7 +870,7 @@
           },
           "paceLength": 10,
           "percentage": false,
-          "pluginVersion": "8.0.0",
+          "pluginVersion": "9.3.2",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -842,6 +880,10 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_agent_thrift_udp_server_packets_processed_total[5m])) by (protocol)",
               "format": "time_series",
               "intervalFactor": 1,
@@ -849,9 +891,7 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "jaeger_agent_thrift_udp_server_packets_processed/sec",
           "tooltip": {
             "shared": true,
@@ -860,33 +900,24 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -894,14 +925,17 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "VictoriaMetrics",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
             "w": 8,
             "x": 8,
-            "y": 16
+            "y": 24
           },
           "hiddenSeries": false,
           "id": 20,
@@ -923,7 +957,7 @@
           },
           "paceLength": 10,
           "percentage": false,
-          "pluginVersion": "8.0.0",
+          "pluginVersion": "9.3.2",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -933,6 +967,10 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "avg(jaeger_agent_thrift_udp_server_packet_size) by (protocol)",
               "format": "time_series",
               "intervalFactor": 1,
@@ -940,9 +978,7 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "avg(jaeger_agent_thrift_udp_server_packet_size)",
           "tooltip": {
             "shared": true,
@@ -951,33 +987,24 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -985,14 +1012,17 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "VictoriaMetrics",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
             "w": 8,
             "x": 16,
-            "y": 16
+            "y": 24
           },
           "hiddenSeries": false,
           "id": 24,
@@ -1014,7 +1044,7 @@
           },
           "paceLength": 10,
           "percentage": false,
-          "pluginVersion": "8.0.0",
+          "pluginVersion": "9.3.2",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -1024,6 +1054,10 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "avg(jaeger_agent_thrift_udp_server_queue_size) by (protocol)",
               "format": "time_series",
               "intervalFactor": 1,
@@ -1031,9 +1065,7 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "jaeger_agent_thrift_udp_server_queue_size",
           "tooltip": {
             "shared": true,
@@ -1042,33 +1074,24 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -1076,14 +1099,17 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "VictoriaMetrics",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
             "w": 8,
             "x": 0,
-            "y": 22
+            "y": 30
           },
           "hiddenSeries": false,
           "id": 26,
@@ -1105,7 +1131,7 @@
           },
           "paceLength": 10,
           "percentage": false,
-          "pluginVersion": "8.0.0",
+          "pluginVersion": "9.3.2",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -1115,6 +1141,10 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_agent_thrift_udp_server_read_errors_total[5m])) by (protocol)",
               "format": "time_series",
               "intervalFactor": 1,
@@ -1122,9 +1152,7 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "jaeger_agent_thrift_udp_server_read_errors/sec",
           "tooltip": {
             "shared": true,
@@ -1133,33 +1161,24 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -1167,14 +1186,17 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "VictoriaMetrics",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
             "w": 8,
             "x": 8,
-            "y": 22
+            "y": 30
           },
           "hiddenSeries": false,
           "id": 22,
@@ -1196,7 +1218,7 @@
           },
           "paceLength": 10,
           "percentage": false,
-          "pluginVersion": "8.0.0",
+          "pluginVersion": "9.3.2",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -1206,6 +1228,10 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_agent_thrift_udp_server_packets_dropped_total[5m])) by (protocol)",
               "format": "time_series",
               "intervalFactor": 1,
@@ -1213,9 +1239,7 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "jaeger_agent_thrift_udp_server_packets_dropped/sec",
           "tooltip": {
             "shared": true,
@@ -1224,33 +1248,24 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -1258,14 +1273,17 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "VictoriaMetrics",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
             "w": 8,
             "x": 16,
-            "y": 22
+            "y": 30
           },
           "hiddenSeries": false,
           "id": 28,
@@ -1287,7 +1305,7 @@
           },
           "paceLength": 10,
           "percentage": false,
-          "pluginVersion": "8.0.0",
+          "pluginVersion": "9.3.2",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -1297,6 +1315,10 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_agent_thrift_udp_t_processor_handler_errors_total[5m])) by (protocol)",
               "format": "time_series",
               "intervalFactor": 1,
@@ -1304,9 +1326,7 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "jaeger_agent_thrift_udp_t_processor_handler_errors/sec",
           "tooltip": {
             "shared": true,
@@ -1315,33 +1335,24 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -1349,14 +1360,17 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "VictoriaMetrics",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
             "w": 8,
             "x": 0,
-            "y": 28
+            "y": 36
           },
           "hiddenSeries": false,
           "id": 6,
@@ -1388,6 +1402,10 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_agent_reporter_batches_submitted_total[5m])) by (format)",
               "format": "time_series",
               "hide": false,
@@ -1397,9 +1415,7 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "jaeger_agent_tchannel_reporter_batches_submitted/sec",
           "tooltip": {
             "shared": true,
@@ -1408,33 +1424,24 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -1442,14 +1449,17 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "VictoriaMetrics",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
             "w": 8,
             "x": 8,
-            "y": 28
+            "y": 36
           },
           "hiddenSeries": false,
           "id": 16,
@@ -1481,6 +1491,10 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_agent_reporter_spans_submitted_total[5m])) by (format)",
               "format": "time_series",
               "intervalFactor": 1,
@@ -1488,9 +1502,7 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "jaeger_agent_tchannel_reporter_spans_submitted/sec",
           "tooltip": {
             "shared": true,
@@ -1499,33 +1511,24 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -1533,14 +1536,17 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "VictoriaMetrics",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
             "w": 8,
             "x": 16,
-            "y": 28
+            "y": 36
           },
           "hiddenSeries": false,
           "id": 12,
@@ -1572,6 +1578,10 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "avg(jaeger_agent_reporter_batch_size) by (format)",
               "format": "time_series",
               "intervalFactor": 1,
@@ -1579,9 +1589,7 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "avg(jaeger_agent_tchannel_reporter_batch_size)",
           "tooltip": {
             "shared": true,
@@ -1590,33 +1598,24 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -1624,14 +1623,17 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "VictoriaMetrics",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
             "w": 8,
             "x": 0,
-            "y": 34
+            "y": 42
           },
           "hiddenSeries": false,
           "id": 4,
@@ -1663,6 +1665,10 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_agent_http_server_requests_total[5m])) by (type)",
               "format": "time_series",
               "intervalFactor": 1,
@@ -1671,9 +1677,7 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "jaeger_agent_http_server_requests/sec",
           "tooltip": {
             "shared": true,
@@ -1682,33 +1686,24 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -1716,14 +1711,17 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "VictoriaMetrics",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
             "w": 8,
             "x": 8,
-            "y": 34
+            "y": 42
           },
           "hiddenSeries": false,
           "id": 14,
@@ -1755,6 +1753,10 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_agent_reporter_batches_failures_total[5m])) by (format)",
               "format": "time_series",
               "intervalFactor": 1,
@@ -1762,9 +1764,7 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "jaeger_agent_tchannel_reporter_batches_failures/sec",
           "tooltip": {
             "shared": true,
@@ -1773,33 +1773,24 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -1807,14 +1798,17 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "VictoriaMetrics",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
             "w": 8,
             "x": 16,
-            "y": 34
+            "y": 42
           },
           "hiddenSeries": false,
           "id": 18,
@@ -1846,6 +1840,10 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_agent_reporter_spans_failures_total[5m])) by (format)",
               "format": "time_series",
               "intervalFactor": 1,
@@ -1853,9 +1851,7 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "jaeger_agent_tchannel_reporter_spans_failures/sec",
           "tooltip": {
             "shared": true,
@@ -1864,33 +1860,24 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -1898,14 +1885,17 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "VictoriaMetrics",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
             "w": 8,
             "x": 0,
-            "y": 40
+            "y": 48
           },
           "hiddenSeries": false,
           "id": 2,
@@ -1937,6 +1927,10 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_agent_http_server_errors_total[5m])) by (source, status)",
               "format": "time_series",
               "intervalFactor": 1,
@@ -1945,9 +1939,7 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "jaeger_agent_http_server_errors/sec",
           "tooltip": {
             "shared": true,
@@ -1956,33 +1948,24 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -1990,14 +1973,17 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "VictoriaMetrics",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
             "w": 16,
             "x": 8,
-            "y": 40
+            "y": 48
           },
           "hiddenSeries": false,
           "id": 10,
@@ -2029,6 +2015,10 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(jaeger_agent_collector_proxy_total) by (endpoint,protocol,result)",
               "format": "time_series",
               "intervalFactor": 1,
@@ -2036,9 +2026,7 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "total(jaeger_agent_collector_proxy)",
           "tooltip": {
             "shared": true,
@@ -2047,43 +2035,45 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         }
       ],
-      "repeat": null,
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Jaeger Agent",
       "type": "row"
     },
     {
       "collapsed": true,
-      "datasource": null,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -2097,7 +2087,10 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "VictoriaMetrics",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -2137,6 +2130,10 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "(jaeger_rpc_request_latency_sum / jaeger_rpc_request_latency_count)*1000",
               "format": "time_series",
               "intervalFactor": 1,
@@ -2145,9 +2142,7 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "Average request latency (milliseconds)",
           "tooltip": {
             "shared": true,
@@ -2156,33 +2151,24 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -2190,7 +2176,10 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "VictoriaMetrics",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -2229,6 +2218,10 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_rpc_http_requests_total[5m]))*60",
               "format": "time_series",
               "hide": false,
@@ -2237,6 +2230,10 @@
               "refId": "A"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_rpc_http_requests_total{status_code=~\"2xx\"}[5m]))*60",
               "format": "time_series",
               "intervalFactor": 1,
@@ -2244,6 +2241,10 @@
               "refId": "B"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_rpc_http_requests_total{status_code!=\"2xx\"}[5m]))*60",
               "format": "time_series",
               "intervalFactor": 1,
@@ -2252,9 +2253,7 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "Requests/min (All requests)",
           "tooltip": {
             "shared": true,
@@ -2263,33 +2262,24 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -2297,7 +2287,10 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "VictoriaMetrics",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -2336,6 +2329,10 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_rpc_http_requests_total{endpoint=~\"/api/traces\"}[5m]))*60",
               "format": "time_series",
               "intervalFactor": 1,
@@ -2343,6 +2340,10 @@
               "refId": "A"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_rpc_http_requests_total{endpoint=~\"/api/traces\",status_code=~\"2xx\"}[5m]))*60",
               "format": "time_series",
               "intervalFactor": 1,
@@ -2350,6 +2351,10 @@
               "refId": "B"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_rpc_http_requests_total{endpoint=~\"/api/traces\",status_code!=\"2xx\"}[5m]))*60",
               "format": "time_series",
               "intervalFactor": 1,
@@ -2358,9 +2363,7 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "Requests/min (endpoint=\"/api/traces\")",
           "tooltip": {
             "shared": true,
@@ -2369,33 +2372,24 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -2403,7 +2397,10 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "VictoriaMetrics",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -2442,6 +2439,10 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_rpc_http_requests_total{endpoint=~\"/api/traces/-traceID-\"}[5m]))*60",
               "format": "time_series",
               "intervalFactor": 1,
@@ -2449,6 +2450,10 @@
               "refId": "A"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_rpc_http_requests_total{endpoint=~\"/api/traces/-traceID-\",status_code=~\"2xx\"}[5m]))*60",
               "format": "time_series",
               "intervalFactor": 1,
@@ -2456,6 +2461,10 @@
               "refId": "B"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_rpc_http_requests_total{endpoint=~\"/api/traces/-traceID-\",status_code!=\"2xx\"}[5m]))*60",
               "format": "time_series",
               "intervalFactor": 1,
@@ -2464,9 +2473,7 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "Requests/min (endpoint=\"/api/traces/-traceID-\")",
           "tooltip": {
             "shared": true,
@@ -2475,33 +2482,24 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -2509,7 +2507,10 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "VictoriaMetrics",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -2548,6 +2549,10 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_rpc_http_requests_total{endpoint=~\"/api/services/-service-/operations\"}[5m]))*60",
               "format": "time_series",
               "intervalFactor": 1,
@@ -2555,6 +2560,10 @@
               "refId": "A"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_rpc_http_requests_total{endpoint=~\"/api/services/-service-/operations\",status_code=~\"2xx\"}[5m]))*60",
               "format": "time_series",
               "intervalFactor": 1,
@@ -2562,6 +2571,10 @@
               "refId": "B"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_rpc_http_requests_total{endpoint=~\"/api/services/-service-/operations\",status_code!=\"2xx\"}[5m]))*60",
               "format": "time_series",
               "intervalFactor": 1,
@@ -2570,9 +2583,7 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "Requests/min (endpoint=\"/api/services/-service-/operations\")",
           "tooltip": {
             "shared": true,
@@ -2581,33 +2592,24 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -2615,7 +2617,10 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "VictoriaMetrics",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -2654,6 +2659,10 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_rpc_http_requests_total{endpoint=~\"/api/services\"}[5m]))*60",
               "format": "time_series",
               "intervalFactor": 1,
@@ -2661,6 +2670,10 @@
               "refId": "A"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_rpc_http_requests_total{endpoint=~\"/api/services\",status_code=~\"2xx\"}[5m]))*60",
               "format": "time_series",
               "intervalFactor": 1,
@@ -2668,6 +2681,10 @@
               "refId": "B"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
+              },
               "expr": "sum(rate(jaeger_rpc_http_requests_total{endpoint=~\"/api/services\",status_code!=\"2xx\"}[5m]))*60",
               "format": "time_series",
               "intervalFactor": 1,
@@ -2676,9 +2693,7 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "Requests/min (endpoint=\"/api/services\")",
           "tooltip": {
             "shared": true,
@@ -2687,42 +2702,42 @@
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
+        }
+      ],
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "refId": "A"
         }
       ],
       "title": "Jaeger Query",
       "type": "row"
     }
   ],
-  "refresh": "5s",
-  "schemaVersion": 30,
+  "refresh": "",
+  "schemaVersion": 37,
   "style": "dark",
   "tags": [
     "jaeger"
@@ -2731,7 +2746,7 @@
     "list": []
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
@@ -2762,5 +2777,6 @@
   "timezone": "",
   "title": "Jaeger",
   "uid": "wR-U0kV7k",
-  "version": 8
+  "version": 1,
+  "weekStart": ""
 }
