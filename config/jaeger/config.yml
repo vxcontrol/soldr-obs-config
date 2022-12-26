@@ -51,7 +51,7 @@ es:
   password: PASSWORD-TEMPLATE
   remote-read-clusters: ""
   send-get-body-as: ""
-  server-urls: http://elasticsearch:9200
+  server-urls: http://elasticsearch.local:9200
   sniffer: false
   sniffer-tls-enabled: false
   tags-as-fields:

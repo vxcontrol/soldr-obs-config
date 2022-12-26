@@ -16,7 +16,7 @@ datasources:
     # <string, required> access mode. proxy or direct (Server or Browser in the UI). Required
     access: Server
     # <string> url
-    url: http://victoriametrics:8428
+    url: http://victoriametrics.local:8428
     # <string> Deprecated, use secureJsonData.password
     version: 1
     # <bool> allow users to edit datasources from the UI.
@@ -27,7 +27,7 @@ datasources:
     # <string, required> access mode. proxy or direct (Server or Browser in the UI). Required
     access: Server
     # <string> url
-    url: http://jaeger:16686
+    url: http://jaeger.local:16686
     # <string> Deprecated, use secureJsonData.password
     version: 1
     # <bool> allow users to edit datasources from the UI.

@@ -23,15 +23,15 @@ receivers:
         - job_name: 'otel-collector'
           scrape_interval: 10s
           static_configs:
-                  - targets: ['node-exporter:9100']
+                  - targets: ['node-exporter.local:9100']
         - job_name: 'otel-elastic'
           scrape_interval: 10s
           static_configs:
-                  - targets: ['elasticsearch_exporter:9114']
+                  - targets: ['elasticsearch-exporter.local:9114']
         - job_name: 'jaeger-collector'
           scrape_interval: 10s
           static_configs:
-                  - targets: ['jaeger:14269']
+                  - targets: ['jaeger.local:14269']
 
 processors:
   batch:
@@ -42,11 +42,11 @@ exporters:
   logging:
     loglevel: error
   jaeger:
-    endpoint: "jaeger:14250"
+    endpoint: "jaeger.local:14250"
     tls:
       insecure: true
   prometheusremotewrite:
-    endpoint: "http://victoriametrics:8428/api/v1/write"
+    endpoint: "http://victoriametrics.local:8428/api/v1/write"
 
 service:
   pipelines:
