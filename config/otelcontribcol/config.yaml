@@ -38,6 +38,18 @@ processors:
     timeout: 10s
     send_batch_size: 1000
 
+  attributes:
+    actions:
+    - action: insert
+      key: loki.attribute.labels
+      value: http.status_code, http.route, http.method, http.host, http.server_name, otel.library.name, span.component
+
+  resource:
+    attributes:
+    - action: insert
+      key: loki.resource.labels
+      value: agent_id, server_id, service.version, service.arch, os.type
+
 exporters:
   logging:
     loglevel: error
@@ -45,6 +57,8 @@ exporters:
     endpoint: "jaeger.local:14250"
     tls:
       insecure: true
+  loki:
+    endpoint: "http://loki.local:3100/loki/api/v1/push"
   prometheusremotewrite:
     endpoint: "http://victoriametrics.local:8428/api/v1/write"
 
@@ -56,8 +70,8 @@ service:
       exporters: [logging, jaeger]
     logs:
       receivers: [otlp]
-      processors: [batch]
-      exporters: [logging]
+      processors: [batch, resource, attributes]
+      exporters: [logging, loki]
     metrics:
       receivers: [otlp,  prometheus]
       processors: [batch]
