@@ -22,6 +22,9 @@ datasources:
     version: 1
     # <bool> allow users to edit datasources from the UI.
     editable: true
+    # additional parameters
+    jsonData:
+      manageAlerts: false
   - name: Jaeger
     # <string, required> datasource type. Required
     type: jaeger
@@ -44,5 +47,6 @@ datasources:
     version: 1
     # <bool> allow users to edit datasources from the UI.
     editable: true
+    # additional parameters
     jsonData:
       maxLines: 1000
