@@ -15,7 +15,7 @@ datasources:
     # <string, required> datasource type. Required
     type: prometheus
     # <string, required> access mode. proxy or direct (Server or Browser in the UI). Required
-    access: Server
+    access: proxy
     # <string> url
     url: http://victoriametrics.local:8428
     # <string> Deprecated, use secureJsonData.password
@@ -29,13 +29,28 @@ datasources:
     # <string, required> datasource type. Required
     type: jaeger
     # <string, required> access mode. proxy or direct (Server or Browser in the UI). Required
-    access: Server
+    access: proxy
     # <string> url
     url: http://jaeger.local:16686
     # <string> Deprecated, use secureJsonData.password
     version: 1
     # <bool> allow users to edit datasources from the UI.
     editable: true
+    # additional parameters
+    jsonData:
+      manageAlerts: false
+      nodeGraph:
+        enabled: true
+      tracesToLogs:
+        datasourceUid: Loki
+        filterBySpanID: true
+        filterByTraceID: true
+        mapTagNamesEnabled: true
+        spanStartTimeShift: '-1m'
+        spanEndTimeShift: '1m'
+        mappedTags:
+          - key: otel.library.name
+            value: service_name
   - name: Loki
     # <string, required> datasource type. Required
     type: loki
@@ -50,3 +65,10 @@ datasources:
     # additional parameters
     jsonData:
       maxLines: 1000
+      manageAlerts: false
+      derivedFields:
+        - datasourceUid: Jaeger
+          matcherRegex: "(?:\"traceid\"):\"(\\w+)\""
+          name: traceid
+          url: '$${__value.raw}'
+          urlDisplayLabel: "Trace for this log"

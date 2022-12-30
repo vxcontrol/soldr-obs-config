@@ -42,13 +42,13 @@ processors:
     actions:
     - action: insert
       key: loki.attribute.labels
-      value: http.status_code, http.route, http.method, http.host, http.server_name, otel.library.name, span.component
+      value: http_status_code, http_route, http_method, http_host_name, net_peer_ip, component
 
   resource:
     attributes:
     - action: insert
       key: loki.resource.labels
-      value: agent_id, server_id, service.version, service.arch, os.type
+      value: agent_id, server_id, api_server_id, group_id, policy_id, service_name, service_version, service_arch, service_os, module
 
 exporters:
   logging:
